@@ -2,12 +2,17 @@ name: Require “Allow Edits”
 
 on: [pull_request_target]
 
+permissions: read-all
+
 jobs:
   _:
+    permissions:
+      pull-requests: read # for ljharb/require-allow-edits to check 'allow edits' on PR
     name: "Require “Allow Edits”"
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: step-security/harden-runner@main
-    - uses: ljharb/require-allow-edits@main
+    - name: Harden Runner
+      uses: step-security/harden-runner@dea7bd51ad9ea3da09c16c60ecd5b9de22cb8e92
+    - uses: ljharb/require-allow-edits@b3932796b71a803b05968c8d7910e882baf4e6e6
